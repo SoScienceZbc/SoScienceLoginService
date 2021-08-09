@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "DatabaseDocomentService": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
