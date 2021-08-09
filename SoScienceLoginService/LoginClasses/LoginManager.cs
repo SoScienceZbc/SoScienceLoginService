@@ -1,10 +1,14 @@
-﻿using LoginService_Grpc;
-using Microsoft.Extensions.Configuration;
+﻿using Grpc.Core;
+using LoginService_Grpc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.DirectoryServices.Protocols;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SoScienceLoginService.LoginClasses
