@@ -20,10 +20,10 @@ namespace SoScienceLoginService.LoginClasses
             LoginRepley loginRepley = new LoginRepley();
             //  LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("dc01.efif.dk", 389);
             LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("10.255.1.1", 389);
-
+            username = username.Split('@')[0];
             LdapConnection connection = new LdapConnection(identifier)
             {
-                Credential = new NetworkCredential(username, password)
+                Credential = new NetworkCredential(username+"@zbc.dk", password)
             };
             try
             {
