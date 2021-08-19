@@ -48,7 +48,7 @@ namespace SoScienceLoginService.LoginClasses
 
 
             // Fix before full release
-            if (username == "Test" && password == "KageMand")
+            if ((username == "Test" || username == "CoTest") && password == "KageMand")
             {
                 loginRepley.LoginSucsefull = true;
                 loginRepley.Admin = true;
