@@ -17,14 +17,19 @@ namespace SoScienceLoginService.LoginClasses
     {
         public LoginRepley LoginAD(string username, string password)
         {
+            Console.WriteLine(username, password);
             LoginRepley loginRepley = new LoginRepley();
-            //  LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("dc01.efif.dk", 389);
+            //LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("dc01.efif.dk", 389);
+            Console.WriteLine("Before Ldap");
             LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("10.255.1.1", 389);
+            Console.WriteLine("After Ldap Identifier");
             username = username.Split('@')[0];
+            Console.WriteLine("Before Ldap Connection");
             LdapConnection connection = new LdapConnection(identifier)
             {
                 Credential = new NetworkCredential(username+"@zbc.dk", password)
             };
+            Console.WriteLine("After Ldap Connection");
             try
             {
                 connection.Bind();

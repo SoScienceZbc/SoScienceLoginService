@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -22,14 +23,16 @@ namespace SoScienceLoginService
         {
             //TODO: AddSSL in the "lo.UseHttps(Path,Name)"
             _logger.LogInformation("Worker running at: {time} just before Creating LoginService", DateTimeOffset.Now);
+            string cert = "/home/soscience/Desktop/Services/soscience.dk.pfx";
+            string pass = File.ReadAllText("/home/soscience/Desktop/Services/PassPhrase.txt");
             await Host.CreateDefaultBuilder().ConfigureWebHostDefaults(cw =>
             {
                 cw.UseKestrel().UseStartup<GrpcAgent>().ConfigureKestrel(kj =>
                 {
                     kj.Listen(System.Net.IPAddress.Any, 48053, lo =>
                     {
-                        //lo.UseHttps();
-                        lo.Protocols = HttpProtocols.Http1;
+                        lo.UseHttps(cert,pass);
+                        lo.Protocols = HttpProtocols.Http2;
                     });
                 });
             }).Build().StartAsync(stoppingToken);
