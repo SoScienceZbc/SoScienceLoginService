@@ -31,8 +31,8 @@ namespace SoScienceLoginService
                 {
                     kj.Listen(System.Net.IPAddress.Any, 48053, lo =>
                     {
-                        lo.UseHttps(cert,pass);
                         lo.Protocols = HttpProtocols.Http2;
+                        lo.UseHttps(cert,pass.Trim());
                     });
                 });
             }).Build().StartAsync(stoppingToken);
