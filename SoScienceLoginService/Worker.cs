@@ -23,8 +23,9 @@ namespace SoScienceLoginService
         {
             //TODO: AddSSL in the "lo.UseHttps(Path,Name)"
             _logger.LogInformation("Worker running at: {time} just before Creating LoginService", DateTimeOffset.Now);
-            string cert = "/home/soscience/Desktop/Services/soscience.dk.pfx";
-            string pass = File.ReadAllText("/home/soscience/Desktop/Services/PassPhrase.txt");
+            //string cert = "/home/soscience/Desktop/Services/soscience.dk.pfx";
+            string cert = "C:/Users/lion0005/Desktop/RSA/soscience.dk.pfx";
+            //string pass = File.ReadAllText("/home/soscience/Desktop/Services/PassPhrase.txt");
             await Host.CreateDefaultBuilder().ConfigureWebHostDefaults(cw =>
             {
                 cw.UseKestrel().UseStartup<GrpcAgent>().ConfigureKestrel(kj =>
@@ -32,7 +33,7 @@ namespace SoScienceLoginService
                     kj.Listen(System.Net.IPAddress.Any, 48053, lo =>
                     {
                         lo.Protocols = HttpProtocols.Http2;
-                        lo.UseHttps(cert,pass.Trim());
+                        lo.UseHttps(cert,/*pass.Trim()*/"SimpelKode4100!");
                     });
                 });
             }).Build().StartAsync(stoppingToken);

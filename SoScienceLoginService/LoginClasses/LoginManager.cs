@@ -21,7 +21,7 @@ namespace SoScienceLoginService.LoginClasses
             LoginRepley loginRepley = new LoginRepley();
             //LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("dc01.efif.dk", 389);
             Console.WriteLine("Before Ldap");
-            LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("10.255.1.1", 389);
+            LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("10.255.1.1", 636);
             Console.WriteLine("After Ldap Identifier");
             username = username.Split('@')[0];
             Console.WriteLine("Before Ldap Connection");
