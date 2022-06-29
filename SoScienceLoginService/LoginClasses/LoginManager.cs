@@ -20,6 +20,8 @@ namespace SoScienceLoginService.LoginClasses
     {
         public LoginRepley LoginAD(string username, string password)
         {
+            //Ldaps Primary Port: 636, Ldaps Secondary Primary Port: 3269, Ldap Primary Port: 389
+
             Console.WriteLine(username, password);
             LoginRepley loginRepley = new LoginRepley();
             ////LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("dc01.efif.dk", 389);
@@ -28,7 +30,7 @@ namespace SoScienceLoginService.LoginClasses
             ////string pwToCheck = string.Concat(pw);
             ////var cer = new X509Certificate("/home/soscience/Desktop/Services/soscience.dk.pfx", pwToCheck);
             //X509Certificate cert = X509Certificate.CreateFromCertFile("/home/soscience/Desktop/Services/LoginService/LDAPS_Certs/EFIF - Root CA.crl");
-            //LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("10.255.1.1", 636);
+            //LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("10.255.1.1", 636); 
             //Console.WriteLine("After Ldap Identifier");
             //X509Certificate2 x509 = new X509Certificate2();
             //byte[] rawData = ReadFile("/hom/soscience/Desktop/Services/LoginService/LDAPS_Certs/EFIF - Issuing CA+.crl");
