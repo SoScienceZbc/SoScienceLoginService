@@ -13,17 +13,38 @@ using System.Threading.Tasks;
 using System.DirectoryServices;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Net.Http.Headers;
 
 namespace SoScienceLoginService.LoginClasses
 {
     class LoginManager
     {
-        public LoginRepley LoginAD(string username, string password)
+        public async Task<LoginRepley> LoginAD(string username, string password)
         {
             //Ldaps Primary Port: 636, Ldaps Secondary Primary Port: 3269, Ldap Primary Port: 389
 
-            Console.WriteLine(username, password);
+            //Console.WriteLine(username, password);
             LoginRepley loginRepley = new LoginRepley();
+
+            var httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("https://ws01.efif.dk");
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var credentials = new
+            {
+                Identity = "zbc-soscience-ws",
+                Password = "****************"
+            };
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(credentials), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PostAsync("/api/Authentication/Authenticate", httpContent);
+            var tokenInfo = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+
+            if (tokenInfo.ToString() != "" || tokenInfo != null)
+            {
+                Console.WriteLine("Token: " +tokenInfo);
+            }
+
             ////LdapDirectoryIdentifier identifier = new LdapDirectoryIdentifier("dc01.efif.dk", 389);
             //Console.WriteLine("Before Ldap");
             ////string[] pw = File.ReadAllLines("/home/soscience/Desktop/Services/PassPhrase.txt");
@@ -84,18 +105,12 @@ namespace SoScienceLoginService.LoginClasses
             //    connection.Dispose();
             //}
 
-
-
             // Fix before full release
             if ((username == "Test" || username == "CoTest") && password == "KageMand")
             {
                 loginRepley.LoginSucsefull = true;
                 loginRepley.Admin = true;
             }
-
-
-
-
 
             return loginRepley;
         }

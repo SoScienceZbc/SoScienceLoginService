@@ -14,8 +14,13 @@ namespace SoScienceLoginService.Services
 
         public override Task<LoginRepley> LoginAD(LoginRequset request, ServerCallContext context)
         {
-            Console.WriteLine($"Host:{context.Host}\nMethod: {context.Method}");
-            return Task.FromResult(loginManager.LoginAD(request.Username, request.Password));
+            return loginManager.LoginAD(request.Username, request.Password);
         }
+
+        //public override Task<LoginRepley> LoginAD(LoginRequset request, ServerCallContext context)
+        //{
+        //    Console.WriteLine($"Host:{context.Host}\nMethod: {context.Method}");
+        //    return Task.FromResult(loginManager.LoginAD(request.Username, request.Password));
+        //}
     }
 }
